@@ -42,13 +42,14 @@ namespace Xamarin.Plugin.Calendar.Controls
             set => SetValue(MonthProperty, value);
         }
 
-        public static readonly BindableProperty YearProperty =
-          BindableProperty.Create(nameof(Year), typeof(int), typeof(Calendar), DateTime.Now.Year, BindingMode.TwoWay);
+        //public static readonly BindableProperty YearProperty =
+        //  BindableProperty.Create(nameof(Year), typeof(int), typeof(Calendar), DateTime.Now.Year, BindingMode.TwoWay);
 
         public int Year
         {
-            get => (int)GetValue(YearProperty);
-            set => SetValue(YearProperty, value);
+            //get => (int)GetValue(YearProperty);
+            //set => SetValue(YearProperty, value);
+            get;set;
         }
 
         public static readonly BindableProperty SelectedDateProperty =
@@ -437,7 +438,7 @@ namespace Xamarin.Plugin.Calendar.Controls
                     newEvents.CollectionChanged += view.OnEventsCollectionChanged;
 
                 view.UpdateEvents();
-                view.monthDaysView.UpdateDays();
+                view.monthDaysView.UpdateDays(false);
             }
         }
 
@@ -517,7 +518,7 @@ namespace Xamarin.Plugin.Calendar.Controls
         private void OnEventsCollectionChanged(object sender, EventCollection.EventCollectionChangedArgs e)
         {
             UpdateEvents();
-            monthDaysView.UpdateDays();
+            monthDaysView.UpdateDays(false);
         }
 
         #endregion

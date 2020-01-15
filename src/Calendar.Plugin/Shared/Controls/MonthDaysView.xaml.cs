@@ -203,7 +203,7 @@ namespace Xamarin.Plugin.Calendar.Controls
             AssignDayViewModels();
             UpdateDaysColors();
             UpdateDayTitles();
-            UpdateDays();
+            UpdateDays(true);
         }
 
         ~MonthDaysView()
@@ -229,8 +229,10 @@ namespace Xamarin.Plugin.Calendar.Controls
 
                 case nameof(Month):
                 case nameof(Year):
+                    UpdateDays(true);
+                    break;
                 case nameof(Events):
-                    UpdateDays();
+                    UpdateDays(false);
                     break;
 
                 case nameof(SelectedDayTextColor):
@@ -246,7 +248,7 @@ namespace Xamarin.Plugin.Calendar.Controls
 
                 case nameof(Culture):
                     UpdateDayTitles();
-                    UpdateDays();
+                    UpdateDays(true);
                     break;
             }
         }
@@ -262,16 +264,19 @@ namespace Xamarin.Plugin.Calendar.Controls
             }
         }
 
-        internal void UpdateDays()
+        internal void UpdateDays(bool animate)
         {
             if (Year == 0 || Month == 0 || Culture == null)
                 return;
 
-            Animate(() => daysControl.FadeTo(0, 50),
+            if (animate)
+                Animate(() => daysControl.FadeTo(0, 50),
                     () => daysControl.FadeTo(1, 200),
                     () => LoadDays(),
                     _lastAnimationTime = DateTime.UtcNow,
-                    () => UpdateDays());
+                    () => UpdateDays(animate));
+            else
+                LoadDays();
         }
 
         private void UpdateDaysColors()
