@@ -5,6 +5,8 @@ namespace Xamarin.Plugin.Calendar.Models
 {
     internal class DayModel : BindableBase<DayModel>
     {
+        private Color _eventColor;
+
         public DateTime Date
         {
             get => GetProperty<DateTime>();
@@ -99,9 +101,14 @@ namespace Xamarin.Plugin.Calendar.Models
                     .Notify(nameof(BackgroundColor));
         }
 
-        public Color EventColor => IsSelected
-                                 ? EventIndicatorSelectedColor
-                                 : EventIndicatorColor;
+        public Color EventColor
+        {
+            get => IsSelected
+                    ? _eventColor == SelectedBackgroundColor ? EventIndicatorSelectedColor : _eventColor
+                    : _eventColor;
+
+            set => _eventColor = value;
+        }
 
         public Color OutlineColor => IsToday()
                                    ? TodayOutlineColor

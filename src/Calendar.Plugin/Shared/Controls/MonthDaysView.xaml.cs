@@ -352,7 +352,7 @@ namespace Xamarin.Plugin.Calendar.Controls
             foreach (var dayView in daysControl.Children.OfType<DayView>())
             {
                 var dayModel = new DayModel();
-
+               
                 dayView.BindingContext = dayModel;
                 dayModel.PropertyChanged += OnDayModelPropertyChanged;
             }
@@ -384,7 +384,7 @@ namespace Xamarin.Plugin.Calendar.Controls
                 dayModel.IsThisMonth = currentDate.Month == Month;
                 dayModel.IsSelected = currentDate == SelectedDate.Date;
                 dayModel.HasEvents = Events.ContainsKey(currentDate);
-
+                dayModel.EventColor = Events.GetEventColor(currentDate, dayModel.EventIndicatorColor);
                 if (dayModel.IsSelected)
                     _selectedDay = dayModel;
             }

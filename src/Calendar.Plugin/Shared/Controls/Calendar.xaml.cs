@@ -42,14 +42,13 @@ namespace Xamarin.Plugin.Calendar.Controls
             set => SetValue(MonthProperty, value);
         }
 
-        //public static readonly BindableProperty YearProperty =
-        //  BindableProperty.Create(nameof(Year), typeof(int), typeof(Calendar), DateTime.Now.Year, BindingMode.TwoWay);
+        public static readonly BindableProperty YearProperty =
+          BindableProperty.Create(nameof(Year), typeof(int), typeof(Calendar), DateTime.Now.Year, BindingMode.TwoWay);
 
         public int Year
         {
-            //get => (int)GetValue(YearProperty);
-            //set => SetValue(YearProperty, value);
-            get;set;
+            get => (int)GetValue(YearProperty);
+            set => SetValue(YearProperty, value);
         }
 
         public static readonly BindableProperty SelectedDateProperty =

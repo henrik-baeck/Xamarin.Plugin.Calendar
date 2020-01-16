@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
+using Xamarin.Forms;
 
 namespace Xamarin.Plugin.Calendar.Models
 {
@@ -10,6 +12,8 @@ namespace Xamarin.Plugin.Calendar.Models
     /// </summary>
     public class EventCollection : Dictionary<DateTime, ICollection>
     {
+        private Dictionary<DateTime, Color> _indicationColors = new Dictionary<DateTime, Color>();
+
         #region ctor
 
         public EventCollection() : base()
@@ -44,8 +48,10 @@ namespace Xamarin.Plugin.Calendar.Models
         {
             var removed = base.Remove(key.Date);
 
-            if (removed)
+            if (removed) { 
                 CollectionChanged?.Invoke(this, new EventCollectionChangedArgs { Item = key.Date, Type = EventCollectionChangedType.Remove });
+                _indicationColors.Remove(key.Date);
+            }
 
             return removed;
         }
@@ -55,9 +61,21 @@ namespace Xamarin.Plugin.Calendar.Models
         /// </summary>
         /// <param name="key">Event DateTime</param>
         /// <param name="value">Collection of events for date</param>
+        public new void Add(EventDateTime key, ICollection value)
+        {
+            base.Add(key.Date.Date, value);
+            _indicationColors.Add(key.Date.Date, key.MarkColor);
+            CollectionChanged?.Invoke(this, new EventCollectionChangedArgs { Item = key.Date, Type = EventCollectionChangedType.Add });
+        } 
+        
+        /// <summary>
+        /// Add collection of values for specific date
+        /// </summary>
+        /// <param name="key">Event DateTime</param>
+        /// <param name="value">Collection of events for date</param>
         public new void Add(DateTime key, ICollection value)
         {
-            base.Add(key.Date, value);
+            base.Add(key.Date.Date, value);
             CollectionChanged?.Invoke(this, new EventCollectionChangedArgs { Item = key.Date, Type = EventCollectionChangedType.Add });
         }
 
@@ -94,7 +112,7 @@ namespace Xamarin.Plugin.Calendar.Models
         /// <returns>true if dictionary contains an element with the specified date; otherwise false</returns>
         public new bool TryGetValue(DateTime key, out ICollection value)
         {
-            return base.TryGetValue(key.Date, out value);
+            return base.TryGetValue(key.Date.Date, out value);
         }
         
         /// <summary>
@@ -105,6 +123,7 @@ namespace Xamarin.Plugin.Calendar.Models
             if (base.Count == 0)
                 return;
 
+            _indicationColors.Clear();
             base.Clear();
             CollectionChanged?.Invoke(this, new EventCollectionChangedArgs {Item = default(DateTime), Type = EventCollectionChangedType.Clear});
         }
@@ -123,6 +142,14 @@ namespace Xamarin.Plugin.Calendar.Models
             Set,
             Remove,
             Clear
+        }
+
+        public Color GetEventColor(DateTime currentDate, Color defaultColor)
+        {
+            if (_indicationColors.ContainsKey(currentDate.Date))
+                return _indicationColors[currentDate.Date];
+
+            return defaultColor;
         }
     }
 }

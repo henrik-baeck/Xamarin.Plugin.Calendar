@@ -18,7 +18,7 @@
             VerticalOptions="CenterAndExpand"
             HorizontalOptions="CenterAndExpand"
             Padding="0"
-            OutlineColor="{Binding OutlineColor}"
+            BorderColor="{Binding OutlineColor}"
             BackgroundColor="{Binding BackgroundColor}" />
 
         <Frame
@@ -31,6 +31,7 @@
             Margin="0,0,0,3"
             Padding="0"
             BackgroundColor="{Binding EventColor}"
+            BorderColor="Transparent"
             InputTransparent="True"
             HasShadow="False" />
 
