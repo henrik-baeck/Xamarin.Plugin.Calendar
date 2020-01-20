@@ -57,6 +57,7 @@
         </StackLayout>
 
         <Grid
+            x:Name="EventGrid"
             Grid.Row="1"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">

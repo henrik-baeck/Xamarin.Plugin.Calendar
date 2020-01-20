@@ -15,6 +15,16 @@ namespace Xamarin.Plugin.Calendar.Controls
     {
         #region Bindable properties
 
+        public static readonly BindableProperty ShowEventsProperty =
+          BindableProperty.Create(nameof(ShowEvents), typeof(bool), typeof(Calendar), true, BindingMode.OneWay, null,
+              (bindable, value, newValue) => { ((Calendar)bindable).EventGrid.IsVisible = (bool)newValue; });
+
+        public bool ShowEvents
+        {
+            get => (bool)GetValue(ShowEventsProperty);
+            set => SetValue(ShowEventsProperty, value);
+        }
+
         public static readonly BindableProperty ShowMonthPickerProperty =
           BindableProperty.Create(nameof(ShowMonthPicker), typeof(bool), typeof(Calendar), true);
 
