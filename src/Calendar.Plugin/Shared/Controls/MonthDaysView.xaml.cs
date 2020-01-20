@@ -383,8 +383,8 @@ namespace Xamarin.Plugin.Calendar.Controls
                 dayModel.Date = currentDate.Date;
                 dayModel.IsThisMonth = currentDate.Month == Month;
                 dayModel.IsSelected = currentDate == SelectedDate.Date;
-                dayModel.HasEvents = Events.ContainsKey(currentDate);
-                dayModel.EventColor = Events.GetEventColor(currentDate, dayModel.EventIndicatorColor);
+                dayModel.HasEvents = Events.ContainsKey(currentDate.Date);
+                dayModel.EventColor = Events.GetEventColor(currentDate.Date, dayModel.EventIndicatorColor);
                 if (dayModel.IsSelected)
                     _selectedDay = dayModel;
             }

@@ -12,6 +12,7 @@ namespace Xamarin.Plugin.Calendar.Models
             get => GetProperty<DateTime>();
             set => SetProperty(value)
                     .Notify(nameof(BackgroundColor),
+                        nameof(EventColor),
                             nameof(OutlineColor));
         }
 
@@ -25,7 +26,7 @@ namespace Xamarin.Plugin.Calendar.Models
         {
             get => GetProperty<bool>();
             set => SetProperty(value)
-                    .Notify(nameof(TextColor));
+                    .Notify(nameof(TextColor), nameof(EventColor));
         }
 
         public bool IsSelected
@@ -107,7 +108,12 @@ namespace Xamarin.Plugin.Calendar.Models
                     ? _eventColor == SelectedBackgroundColor ? EventIndicatorSelectedColor : _eventColor
                     : _eventColor;
 
-            set => _eventColor = value;
+            set
+            {
+                _eventColor = value;
+                Notify(nameof(EventColor));
+                Notify(nameof(OutlineColor));
+            }
         }
 
         public Color OutlineColor => IsToday()
