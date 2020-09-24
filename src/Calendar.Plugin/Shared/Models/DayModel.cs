@@ -104,10 +104,7 @@ namespace Xamarin.Plugin.Calendar.Models
 
         public Color EventColor
         {
-            get => IsSelected
-                    ? _eventColor == SelectedBackgroundColor ? EventIndicatorSelectedColor : _eventColor
-                    : _eventColor;
-
+            get => IsSelected ? EventIndicatorSelectedColor : _eventColor;
             set
             {
                 _eventColor = value;

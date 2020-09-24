@@ -369,7 +369,7 @@ namespace Xamarin.Plugin.Calendar.Controls
 
         private void LoadDays()
         {
-            DateTime monthStart = new DateTime(Year, Month, 1);
+            var monthStart = new DateTime(Year, Month, 1);
             var addDays = ((int)Culture.DateTimeFormat.FirstDayOfWeek) - (int)monthStart.DayOfWeek;
 
             if (addDays > 0)

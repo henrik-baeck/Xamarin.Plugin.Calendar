@@ -1,7 +1,7 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;MonoAndroid80;MonoAndroid81;Xamarin.iOS10</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;MonoAndroid90;Xamarin.iOS10</TargetFrameworks>
     <Authors>Josip Caleta</Authors>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <PackageId>Xamarin.Plugin.Calendar-uniZite</PackageId>
@@ -12,9 +12,9 @@
     <Copyright>Copyright 2019 lilcodelab</Copyright>
     <Company>lilcodelab</Company>
     <Owners>lilcodelab</Owners>
-    <AssemblyVersion>1.0.0.8</AssemblyVersion>
+    <AssemblyVersion>1.0.1.2</AssemblyVersion>
     <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>1.0.0.8</Version>
+    <Version>1.0.1.2</Version>
     <Description>Customized calendar plugin for Xamarin.Forms</Description>
     <Summary>Customized calendar plugin for Xamarin.Forms.</Summary>
     <PackOnBuild>true</PackOnBuild>
@@ -31,7 +31,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <DesignTimeBuild>false</DesignTimeBuild>
-    <FileVersion>1.0.0.8</FileVersion>
+    <FileVersion>1.0.1.2</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
@@ -49,7 +49,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.0.0.446417" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />
     <Compile Include="Shared\**\*.cs" />
   </ItemGroup>
 

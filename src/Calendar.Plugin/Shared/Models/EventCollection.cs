@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using Xamarin.Forms;
@@ -147,7 +149,9 @@ namespace Xamarin.Plugin.Calendar.Models
         public Color GetEventColor(DateTime currentDate, Color defaultColor)
         {
             if (_indicationColors.ContainsKey(currentDate.Date))
+            {
                 return _indicationColors[currentDate.Date];
+            }
 
             return defaultColor;
         }
